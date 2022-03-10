@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Inscricao extends StatefulWidget {
-  const Inscricao({Key? key}) : super(key: key);
-
   @override
-  State<Inscricao> createState() => _InscricaoState();
+  _InscricaoState createState() => _InscricaoState();
 }
 
 class _InscricaoState extends State<Inscricao> {
@@ -13,7 +11,7 @@ class _InscricaoState extends State<Inscricao> {
     return Container(
       child: Center(
         child: Text(
-          "Incrições",
+          "Inscrições",
           style: TextStyle(
               fontSize: 25
           ),
@@ -22,3 +20,4 @@ class _InscricaoState extends State<Inscricao> {
     );
   }
 }
+
