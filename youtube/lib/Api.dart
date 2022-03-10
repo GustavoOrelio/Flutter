@@ -1,17 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:youtube/model/Video.dart';
 
-
-const CHAVE_YOUTUBE_API = "AIzaSyA35kUhfo_ggpkto7ooTzelHGsBinVdFV0";
+const CHAVE_YOUTUBE_API = "AIzaSyAQATSduOl3yjZ6jPI2NmQllloA74fHVYE";
 const ID_CANAL = "UCVHFbqXqoYvEWM1Ddxl0QDg";
 const URL_BASE = "https://www.googleapis.com/youtube/v3/";
 
 class Api {
 
-  Future<List<Video>> pesquisar (String pesquisa) async {
+  Future<List<Video>> pesquisar(String pesquisa) async {
 
     http.Response response = await http.get(
         URL_BASE + "search"
@@ -53,3 +51,4 @@ class Api {
   }
 
 }
+
