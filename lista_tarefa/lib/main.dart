@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lista_tarefa/Home.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
+void main() => runApp(MaterialApp(
+  home: Home(),
+  debugShowCheckedModeBanner: false,
+));
