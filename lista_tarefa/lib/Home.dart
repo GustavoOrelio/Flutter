@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List _listaTarefas = [];
+  Map<String, dynamic> _ultimaTarefaRemovida = Map();
 
   TextEditingController _controllerTarefa = TextEditingController();
 
@@ -63,14 +64,32 @@ class _HomeState extends State<Home> {
   }
 
   Widget criarItemLista(context, index) {
-    final item = _listaTarefas[index]["titulo"];
+    //final item = _listaTarefas[index]["titulo"];
 
     return Dismissible(
-        key: Key(item),
+        key: Key( DateTime.now().millisecondsSinceEpoch.toString() ),
         direction: DismissDirection.endToStart,
-        onDismissed: (direction){
+        onDismissed: (direction) {
+          _ultimaTarefaRemovida = _listaTarefas[index];
+
           _listaTarefas.removeAt(index);
           _salvarArquivo();
+
+          final snackbar = SnackBar(
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 5),
+            content: Text("Tarefa removida!!"),
+            action: SnackBarAction(
+                label: "Desfazer",
+                onPressed: () {
+                  setState(() {
+                    _listaTarefas.insert(index, _ultimaTarefaRemovida);
+                  });
+                  _salvarArquivo();
+                }),
+          );
+
+          Scaffold.of(context).showSnackBar(snackbar);
         },
         background: Container(
           color: Colors.red,
