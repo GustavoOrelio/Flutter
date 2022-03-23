@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:minhas_anotacoes/helper/AnotacaoHelper.dart';
-
+import 'package:intl/intl.dart';
 import 'model/Anotacao.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -21,6 +24,7 @@ class _HomeState extends State<Home> {
         context: context,
         builder: (context) {
           return AlertDialog(
+            contentPadding: EdgeInsets.all(10),
             title: Text("Adicionar anotação"),
             content: Column(
               mainAxisSize: MainAxisSize.min,
@@ -84,6 +88,14 @@ class _HomeState extends State<Home> {
     _recuperarAnotacoes();
   }
 
+  _formatarData(String data) {
+    initializeDateFormatting("pt_BR");
+    var formatador = DateFormat("dd/MM/yyyy H:m:s");
+    DateTime dataConvertida = DateTime.parse(data);
+    String dataFormatada = formatador.format(dataConvertida);
+    return dataFormatada;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -93,6 +105,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: Text("Minhas anotações"),
         backgroundColor: Colors.lightGreen,
@@ -102,12 +115,13 @@ class _HomeState extends State<Home> {
           Expanded(
             child: ListView.builder(
                 itemCount: _anotacoes.length,
-                itemBuilder: (context, index){
+                itemBuilder: (context, index) {
                   final anotacao = _anotacoes[index];
                   return Card(
                     child: ListTile(
                       title: Text(anotacao.titulo),
-                      subtitle: Text("${anotacao.data} - ${anotacao.descricao}"),
+                      subtitle: Text(
+                          "${_formatarData(anotacao.data)} - ${anotacao.descricao}"),
                     ),
                   );
                 }),
