@@ -64,4 +64,13 @@ class AnotacaoHelper {
       whereArgs: [anotacao.id]
     );
   }
+
+  Future<int> removerAnotacao(int id) async{
+    var bancoDados = await db;
+    return await bancoDados.delete(
+        nomeTabela,
+        where: "id = ?",
+        whereArgs: [id]
+    );
+  }
 }

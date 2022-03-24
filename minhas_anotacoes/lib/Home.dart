@@ -108,10 +108,16 @@ class _HomeState extends State<Home> {
 
   _formatarData(String data) {
     initializeDateFormatting("pt_BR");
-    var formatador = DateFormat("dd/MM/yyyy H:m:s");
+    var formatador = DateFormat("dd/MM/yyyy HH:mm:ss");
     DateTime dataConvertida = DateTime.parse(data);
     String dataFormatada = formatador.format(dataConvertida);
     return dataFormatada;
+  }
+
+  _removerAnotacao(int id) async{
+    await _db.removerAnotacao(id);
+
+    _recuperarAnotacoes();
   }
 
   @override
@@ -155,7 +161,9 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              _removerAnotacao(anotacao.id);
+                            },
                             child: Padding(
                               padding: EdgeInsets.only(right: 0),
                               child: Icon(
