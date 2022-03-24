@@ -29,7 +29,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff795548),
+        backgroundColor: Color(0xFF86594D),
         title: Text("Aprenda inglês"),
         bottom: TabBar(
           indicatorWeight: 4,
